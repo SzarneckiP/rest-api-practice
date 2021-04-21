@@ -13,7 +13,7 @@ router.route('/testimonials/random').get((req, res) => {
 });
 
 router.route('/testimonials/:id').get((req, res) => {
-    res.json(db.testimonials.filter(db => db.id == req.params.id));
+    res.json(db.testimonials.filter(testimonials => testimonials.id == req.params.id));
 });
 
 router.route('/testimonials').post((req, res) => {
@@ -33,8 +33,9 @@ router.route('/testimonials/:id').put((req, res) => {
 });
 
 router.route('/testimonials/:id').delete((req, res) => {
-    db.testimonials.filter(testimonials => testimonials.id == req.params.id);
-    res.json({ message: 'ok' });
+    delete db.testimonials[db.testimonials.filter(testimonials => { testimonials.id == req.params.id })];
+    //db.testimonials.delete(testimonials => testimonials.id == req.params.id);
+    res.json(delete db.testimonials[db.testimonials.filter(testimonials => { testimonials.id == req.params.id })]);
 });
 
 

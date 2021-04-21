@@ -12,6 +12,6 @@
     "uuid": "^8.3.2"
   },
   "scripts": {
-    "start": "yarn nodemon server.js"
+    "start": "nodemon server.js"
   }
 }
