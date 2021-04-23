@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 const { v4: uuidv4 } = require('uuid');
+const { seats } = require('../db');
 
 
 router.route('/seats').get((req, res) => {
@@ -13,27 +14,34 @@ router.route('/seats/random').get((req, res) => {
 });
 
 router.route('/seats/:id').get((req, res) => {
-    res.json(db.seats.filter(seats => seats.id == req.params.id));
+    res.json(db.seats.find(seats => seats.id == req.params.id));
 });
 
 router.route('/seats').post((req, res) => {
-    const { author, text } = req.body;
+    const { day, seat, client, email } = req.body;
     const payload = {
-        text: text,
-        author: author,
         id: uuidv4(),
+        day: day,
+        seat: seat,
+        client: client,
+        email: email,
     };
     db.seats.push(payload);
     res.json({ message: ' ok' });
 });
 
 router.route('/seats/:id').put((req, res) => {
-    db.seats[req.params.id] = req.body;
+    const { day, seat, client, email } = req.body;
+    const dbSeats = db.seats.find(seat => (seat.id == req.params.id));
+    dbSeats.day = day;
+    dbSeats.seat = seat;
+    dbSeats.client = client;
+    dbSeats.email = email;
     res.json({ message: 'ok' });
 });
 
-router.route('seats/:id').delete((req, res) => {
-    db.seats.filter(seats => seats.id == req.params.id);
+router.route('/seats/:id').delete((req, res) => {
+    db.seats = db.seats.filter(seat => (seat.id != req.params.id));
     res.json({ message: 'ok' });
 });
 

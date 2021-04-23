@@ -8,7 +8,7 @@ const path = require('path');
 const app = express();
 
 app.use(cors());
-app.use(express.static(path.join(__dirname, '/client/public/')));
+app.use(express.static(path.join(__dirname, '/client/build/')));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -17,7 +17,7 @@ app.use('/api', concertsRoutes);
 app.use('/api', seatsRoutes);
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '/client/public/index.html'));
+    res.sendFile(path.join(__dirname, '/client/build/index.html'));
 });
 
 app.use((req, res) => {
