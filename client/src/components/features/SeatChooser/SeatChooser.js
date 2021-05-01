@@ -29,6 +29,11 @@ class SeatChooser extends React.Component {
     else return <Button key={seatId} color="primary" className="seats__seat" outline onClick={(e) => updateSeat(e, seatId)}>{seatId}</Button>;
   }
 
+  freeSeat = () => {
+    const { seats, chosenDay } = this.props;
+    return 50 - seats.filter(seat => seat.day === chosenDay).length;
+  }
+
   render() {
 
     const { prepareSeat } = this;
@@ -42,6 +47,7 @@ class SeatChooser extends React.Component {
         { (requests['LOAD_SEATS'] && requests['LOAD_SEATS'].success) && <div className="seats">{[...Array(50)].map((x, i) => prepareSeat(i + 1))}</div>}
         { (requests['LOAD_SEATS'] && requests['LOAD_SEATS'].pending) && <Progress animated color="primary" value={50} />}
         { (requests['LOAD_SEATS'] && requests['LOAD_SEATS'].error) && <Alert color="warning">Couldn't load seats...</Alert>}
+        <h3>Free seats: {this.freeSeat()}/50 </h3>
       </div>
     )
   };
