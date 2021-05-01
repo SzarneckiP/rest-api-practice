@@ -35,7 +35,6 @@ class SeatChooser extends React.Component {
   }
 
   render() {
-
     const { prepareSeat } = this;
     const { requests } = this.props;
 
