@@ -30,6 +30,7 @@ router.route('/seats').post((req, res) => {
     if (db.seats.some(seat => seat.day !== payload.day && seat.seat !== payload.seat)) {
         db.seats.push(payload);
         res.json({ message: ' ok' });
+        req.io.emit('seatsUpdate', db.seats);
     } else {
         res.json({ message: "The slot is already taken..." })
     }
