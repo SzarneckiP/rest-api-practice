@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const socket = require('socket.io');
+const mongoose = require('mongoose');
 
 const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertsRoutes = require('./routes/concerts.routes');
@@ -19,14 +20,22 @@ io.on('connection', (socket) => {
     console.log('New Socket!');
 });
 
-app.use((req, res, next) => {
-    req.io = io;
-    next();
+mongoose.connect('mongodb://localhost:27017/NewWaveDB', { useNewUrlParser: true });
+const db = mongoose.connection;
+
+db.once('open', () => {
+    console.log('Connected to the database');
 });
+db.on('error', err => console.log('Error ' + err));
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+app.use((req, res, next) => {
+    req.io = io;
+    next();
+});
 
 app.use(express.static(path.join(__dirname, '/client/build/')));
 
