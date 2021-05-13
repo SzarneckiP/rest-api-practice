@@ -20,7 +20,7 @@ io.on('connection', (socket) => {
     console.log('New Socket!');
 });
 
-mongoose.connect('mongodb://localhost:27017/NewWaveDB', { useNewUrlParser: true });
+mongoose.connect('mongodb+srv://SzarneckiP:Afromon123@cluster0.zrsym.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 db.once('open', () => {
