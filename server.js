@@ -14,7 +14,7 @@ const server = app.listen(process.env.PORT || 8000, () => {
     console.log('Server is running...');
 });
 
-const io = socket(server);
+const io = socket(server, { cors: true });
 
 io.on('connection', (socket) => {
     console.log('New Socket!');
@@ -50,3 +50,5 @@ app.get('*', (req, res) => {
 app.use((req, res) => {
     res.status(404).send({ message: 'Not found...' });
 });
+
+module.exports = server;

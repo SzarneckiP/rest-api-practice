@@ -36,6 +36,7 @@ exports.post = async (req, res) => {
         const newSeat = new Seats({ day: day, seat: seat, client: client, email: email });
         await newSeat.save();
         res.json(newSeat);
+        req.io.emit('seatsUpdated', await Seats.find());
     } catch (err) {
         res.status(500), json({ message: err });
     }
