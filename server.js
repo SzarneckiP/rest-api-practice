@@ -21,7 +21,7 @@ io.on('connection', (socket) => {
     console.log('New Socket!');
 });
 
-mongoose.connect(`mongodb+srv://SzarneckiP:Afromon123@cluster0.zrsym.mongodb.net/NewWaveDB?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(`mongodb+srv://${process.env.userName}:${process.env.dbPass}@cluster0.zrsym.mongodb.net/NewWaveDB?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 db.once('open', () => {
