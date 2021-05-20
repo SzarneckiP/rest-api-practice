@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
 const socket = require('socket.io');
 const mongoose = require('mongoose');
 
@@ -20,7 +21,7 @@ io.on('connection', (socket) => {
     console.log('New Socket!');
 });
 
-mongoose.connect('mongodb+srv://SzarneckiP:Afromon123@cluster0.zrsym.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(`mongodb+srv://${process.env.userName}:${process.env.dbPass}@cluster0.zrsym.mongodb.net/NewWaveDB?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 db.once('open', () => {
@@ -29,6 +30,7 @@ db.once('open', () => {
 db.on('error', err => console.log('Error ' + err));
 
 app.use(cors());
+app.use(helmet());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
