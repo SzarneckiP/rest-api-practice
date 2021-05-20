@@ -21,6 +21,8 @@ io.on('connection', (socket) => {
     console.log('New Socket!');
 });
 
+process
+
 mongoose.connect(`mongodb+srv://${process.env.userName}:${process.env.dbPass}@cluster0.zrsym.mongodb.net/NewWaveDB?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
