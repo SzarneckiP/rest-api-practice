@@ -4,6 +4,8 @@ const helmet = require('helmet');
 const socket = require('socket.io');
 const mongoose = require('mongoose');
 
+require('dotenv').config();
+
 const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertsRoutes = require('./routes/concerts.routes');
 const seatsRoutes = require('./routes/seats.routes');
@@ -21,7 +23,8 @@ io.on('connection', (socket) => {
     console.log('New Socket!');
 });
 
-mongoose.connect(`mongodb+srv://${process.env.userName}:${process.env.dbPass}@cluster0.zrsym.mongodb.net/NewWaveDB?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
+
+mongoose.connect(`mongodb+srv://${process.env.USER_NAME}:${process.env.DB_PASS}@cluster0.zrsym.mongodb.net/NewWaveDB?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 db.once('open', () => {
