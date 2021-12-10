@@ -17,7 +17,7 @@
     "mongodb": "3.3.2",
     "mongodb-memory-server": "^6.9.6",
     "mongoose": "^5.12.10",
-    "node-sass": "^5.0.0",
+    "node-sass": "^7.0.0",
     "nodemon": "^2.0.7",
     "onchange": "^7.1.0",
     "snyk": "^1.604.0",
